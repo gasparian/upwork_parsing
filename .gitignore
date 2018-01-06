@@ -1,0 +1,6 @@
+data/
+.ipynb_checkpoints/
+upwork_df.csv
+Untitled.ipynb
+*.log
+*.txt
