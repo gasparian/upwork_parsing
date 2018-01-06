@@ -2,5 +2,6 @@ data/
 .ipynb_checkpoints/
 upwork_df.csv
 Untitled.ipynb
+last_dt.txt
 *.log
-*.txt
+
