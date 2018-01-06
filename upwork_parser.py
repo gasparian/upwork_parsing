@@ -66,6 +66,12 @@ def skills(job):
     else:
         return np.nan
 
+def duration(job):
+    try:
+        return job.find('span', class_='js-duration').text.strip().replace('Est. Time: ', '').lower()
+    except:
+        return np.nan
+
 class TqdmLoggingHandler(logging.Handler):
 
     def __init__ (self, level = logging.NOTSET):
@@ -93,7 +99,7 @@ if __name__ == '__main__':
 	if os.path.isfile('./upwork_df.csv'):
 	    df = pd.read_csv('./upwork_df.csv', index_col=0)
 	else:
-	    df = pd.DataFrame(columns=['budget', 'desc', 'key', 'level', 'skills', 'time', 'title', 'type'])
+	    df = pd.DataFrame(columns=['budget', 'desc', 'key', 'level', 'skills', 'time', 'title', 'type', 'duration'])
 
 	logging.info('Start parsing pages...')
 
@@ -108,7 +114,7 @@ if __name__ == '__main__':
 
 		    for job in jobs:
 		        row = {
-		            'key': key(job), 'title': title(job), 'time': time(job), 'type': type_(job), 
+		            'key': key(job), 'title': title(job), 'time': time(job), 'type': type_(job), 'duration': duration(job),
 		            'level': level(job), 'budget': budget(job), 'desc': desc(job), 'skills': skills(job)
 		        }
 		        try:
