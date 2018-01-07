@@ -16,7 +16,7 @@ Then we can parse our data to get jobs description. The result - *.csv file in .
 ```
 python upwork_parser.py ./data
 ```
-When we run these scripts again, only pages with **new jobs** will be downloaded and processed.
+When we run these scripts again, only pages with **new jobs** will be downloaded and processed (it will be faster if only new folder will be passed as argument to pareser).
 
 ## Dependencies  
 
