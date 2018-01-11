@@ -1,6 +1,6 @@
 # Upwork parsing
 
-This code make an upwork [search query](https://www.upwork.com/o/jobs/browse/c/data-science-analytics/?page=2&sort=create_time%2Bdesc) to data-science related jobs, iterate through result pages and get every job description.
+This code make an upwork [search query](https://www.upwork.com/o/jobs/browse/c/data-science-analytics/?page=2&sort=create_time%2Bdesc) to category (see [the list](https://www.upwork.com/o/jobs/browse/)) related jobs, iterate through result pages and get every job description.
 Includes logging.
 
 ## Usage
@@ -8,7 +8,7 @@ Includes logging.
 At first we need to crawl all pages from upwork responses. Pages will be stored in ./data/%CURRENT_DATE% directory.
 
 ```
-python upwork_scraper.py
+python upwork_scraper.py 'Data Science & Analytics'
 ```
 
 Then we can parse our data to get jobs description. The result - *.csv file in ./.
