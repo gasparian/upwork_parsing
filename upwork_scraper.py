@@ -19,6 +19,7 @@ class Scraper:
     def __init__(self, cat):
 
         cats = {
+            'All Categories': 'all',
             'Data Science & Analytics':'data-science-analytics',
             'Web, Mobile & Software Dev':'web-mobile-software-dev',
             'IT & Networking':'it-networking',
@@ -53,6 +54,8 @@ class Scraper:
             self.last_dt = datetime(1970, 1, 1)
 
     def makeUrl(self, page):
+        if self.cat == 'all':
+            return "https://www.upwork.com/o/jobs/browse/?page=%i" % page + '&sort=create_time%2Bdesc'
         return "https://www.upwork.com/o/jobs/browse/c/%s/?page=%i" % (self.cat, page) + '&sort=create_time%2Bdesc'
 
     def wait(self, agent, page):
