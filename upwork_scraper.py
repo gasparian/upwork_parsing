@@ -5,6 +5,7 @@ from time import sleep
 import random
 import os
 import logging
+import sys
 
 from bs4 import BeautifulSoup as soup
 
@@ -15,23 +16,36 @@ logging.basicConfig(level=logging.DEBUG,
 
 class Scraper:
 
-    def __init__(self):
+    def __init__(self, cat):
+
+        cats = {
+            'Data Science & Analytics':'data-science-analytics',
+            'Web, Mobile & Software Dev':'web-mobile-software-dev',
+            'IT & Networking':'it-networking',
+            'Engineering & Architecture ':'engineering-architecture',
+            'Design & Creative':'design-creative',
+            'Writing':'writing',
+            'Translation':'translation',
+            'Legal':'legal',
+            'Admin Support':'admin-support',
+            'Customer Service':'customer-service',
+            'Sales & Marketing':'sales-marketing',
+            'Accounting & Consulting':'accounting-consulting'
+        }
+        self.cat = cats[cat]
         self.USER_AGENT_LIST = [
             'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.36 Safari/535.7',
             'Mozilla/5.0 (Windows NT 6.2; Win64; x64; rv:16.0) Gecko/16.0 Firefox/16.0',
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
         ]
         self.output = None
-        try:
-            os.stat('./data')
-        except:
-            os.mkdir('./data')
-
         self.current_date = datetime.now().date().strftime("%Y-%m-%d")
-        try:
-            os.stat('./data/%s' % self.current_date)
-        except:
-            os.mkdir('./data/%s' % self.current_date)
+
+        for dir_name in ['./data', './data/%s' % self.cat, './data/%s/%s' % (self.cat, self.current_date)]:
+            try:
+                os.stat(dir_name)
+            except:
+                os.mkdir(dir_name)
 
         if os.path.isfile('./last_dt.txt'):
             self.last_dt = datetime.strptime(open('./last_dt.txt', 'r').readline(), '%Y-%m-%d %H:%M:%S')
@@ -39,7 +53,7 @@ class Scraper:
             self.last_dt = datetime(1970, 1, 1)
 
     def makeUrl(self, page):
-        return "https://www.upwork.com/o/jobs/browse/c/data-science-analytics/?page=%i" % page + '&sort=create_time%2Bdesc'
+        return "https://www.upwork.com/o/jobs/browse/c/%s/?page=%i" % (self.cat, page) + '&sort=create_time%2Bdesc'
 
     def wait(self, agent, page):
         flag = True
@@ -90,7 +104,7 @@ class Scraper:
                     f.write(dt.strftime("%Y-%m-%d %H:%M:%S"))
             
             if dt > self.last_dt:
-                with open('./data/'+self.current_date+'/page_%s.html' % i, 'w') as f:
+                with open('./data/%s/%s' % (self.cat, self.current_date+'/page_%s.html' % i), 'w') as f:
                     f.write(response)
                     logging.info('File #%i saved!' % i)
                 sleep(random.randint(3,8))
@@ -100,4 +114,4 @@ class Scraper:
                 break
 
 if __name__ == '__main__':
-    Scraper().scrap()
+    Scraper(sys.argv[1]).scrap()
