@@ -1,6 +1,6 @@
 # Upwork parsing
 
-This code make an upwork [search query](https://www.upwork.com/o/jobs/browse/c/data-science-analytics/?page=2&sort=create_time%2Bdesc) to category (see [the list](https://www.upwork.com/o/jobs/browse/)) related jobs, iterate through result pages and get every job description.
+This code make an upwork [search query](https://www.upwork.com/o/jobs/browse/c/data-science-analytics/?page=2&sort=create_time%2Bdesc) to category related jobs (see [the categories list](https://www.upwork.com/o/jobs/browse/)), iterate through result pages and get every job description.
 Includes logging.
 
 ## Usage
