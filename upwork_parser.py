@@ -88,7 +88,7 @@ class TqdmLoggingHandler(logging.Handler):
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s:%(name)s:%(levelname)s:%(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    handlers=[logging.FileHandler('./upwork_parser.log'), TqdmLoggingHandler()])
+                    handlers=[logging.FileHandler('./upwork_parser.log'), TqdmLoggingHandler()])    
 
 if __name__ == '__main__':
 
