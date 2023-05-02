@@ -1,4 +1,7 @@
-beautifulsoup4==4.6.0
-pandas==0.20.1
-numpy==1.13.3
-tqdm==4.14.0
+beautifulsoup4==4.12.2
+certifi==2022.12.7
+charset-normalizer==3.1.0
+idna==3.4
+requests==2.29.0
+soupsieve==2.4.1
+urllib3==1.26.15
